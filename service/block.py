@@ -16,7 +16,7 @@ class BlockService:
 			'id': 1
 		}
 		response = requests.post(self.base_url, json.dumps(data))
-		return response.json()
+		return response
 
 	def get_transaction_by_hash(self, transaction_hash):
 		"""Gets Transaction by hash"""
@@ -27,7 +27,7 @@ class BlockService:
 			'id': 1
 		}
 		response = requests.post(self.base_url, json.dumps(data))
-		return response.json()
+		return response
 
 	def get_transaction_by_block_number_and_index(self, block_number, index):
 		"""Gets Transaction by Block number and index"""
@@ -38,4 +38,4 @@ class BlockService:
 			'id': 1
 		}
 		response = requests.post(self.base_url, json.dumps(data))
-		return response.json()
+		return response
