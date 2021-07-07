@@ -1,6 +1,7 @@
 """Block Service"""
-import requests
 import json
+
+import requests
 
 
 class BlockService:
