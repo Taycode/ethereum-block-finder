@@ -1,7 +1,7 @@
 """Block Namespace"""
 
 from flask_restx import Namespace, Resource
-from service.block import BlockService
+from app.service.block import BlockService
 import json
 import redis
 
