@@ -1,4 +1,5 @@
 """Block Namespace"""
+import os
 
 from flask_restx import Namespace, Resource
 from app.service.block import BlockService
@@ -10,7 +11,7 @@ cache = redis.Redis(host='redis_db')
 api = Namespace('blocks', description='Block endpoints')
 
 
-@api.route('/<block>/txs/<txs>')
+@api.route('/<block>/txs/<txs>/')
 class BlockByBlockNumberAndTransactionIndexOrHash(Resource):
 	"""Block Endpoint"""
 
