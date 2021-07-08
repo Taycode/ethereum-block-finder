@@ -9,8 +9,8 @@ services:
     volumes:
     - .:/server
     depends_on:
-      - redis
-  redis:
+      - redis_db
+  redis_db:
     image: redis:latest
     ports:
       - "6379:6379"

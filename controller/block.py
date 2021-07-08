@@ -2,6 +2,10 @@
 
 from flask_restx import Namespace, Resource
 from service.block import BlockService
+import json
+import redis
+
+cache = redis.Redis(host='redis_db')
 
 api = Namespace('blocks', description='Block endpoints')
 
@@ -61,17 +65,35 @@ class BlockByBlockNumber(Resource):
 		"""
 		if block == 'latest':
 			block_number = block
-		else:
+		elif block.isnumeric():
 			block_number = hex(int(block))
+		else:
+			return {'error': 'Block Number should be numeric or \'latest\''}, 400
 
-		response = self.service.get_block_by_number(block_number)
+		response = cache.get(block_number)
 
-		# If API Response is not status code 200
-		if not response.status_code == 200:
-			return {'error': 'bad request'}, 400
+		if not response:
 
-		# If API returns error but returns status code 200
-		if response.json().get('error'):
-			return {'error': 'bad request'}, 400
+			# Get Data from Gateway
+			response = self.service.get_block_by_number(block_number)
 
-		return response.json(), 200
+			# Cache the Data
+			cache.set(block_number, json.dumps(response.json()))
+
+			# Check if response isn't an error
+
+			# If API Response is not status code 200
+			if not response.status_code == 200:
+				return {'error': 'bad request'}, 400
+
+			# If API returns error but returns status code 200
+			if response.json().get('error'):
+				return {'error': 'bad request'}, 400
+
+			# Get Json of response
+			response = response.json()
+		else:
+
+			response = json.loads(response)
+
+		return response, 200
