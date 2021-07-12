@@ -49,6 +49,10 @@ If the tests passes, we should see a message stating the tests has passed.
 - Docker for containerizing
 - Redis for Caching
 
+# Problems faced
+
+I had to take my time to understand how the blockchain works and also the definitions and relationship between blocks
+and transactions.
 
 # Developed by
 
