@@ -10,7 +10,7 @@ This is an application for getting details about blocks and transactions.
 
 3. Run the containers by running `docker-compose up`
 
-4. The swagger docs can be accessed by opening `localhost:500/docs/` on the browser
+4. The swagger docs can be accessed by opening `localhost:5000/docs/` on the browser
 
 # API ENDPOINTS
 
